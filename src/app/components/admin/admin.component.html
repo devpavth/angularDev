@@ -4,7 +4,7 @@
             <h2>Student Management</h2>
         </div>
         <div class="admin-header-filter">
-            <select name="gender" class="filter-select">
+            <select name="gender" class="filter-select" [value]="filterText" (change)="OnFilterValueChanged($event)">
                 <option value="All">All</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -68,7 +68,9 @@
                     </td>
                     <td>
                         <button class="save-button" (click)="OnInsertSaved()">
-                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            <!-- <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> -->
+                            <i class="fa-solid fa-circle-check" style="color: #28B463;" aria-hidden="true"></i>
+                            <!-- <i class="fa-solid fa-circle-check" aria-hidden="true"></i> -->
                         </button>
                     </td>
                     <td>
@@ -132,7 +134,7 @@
                     </td>
                     <td *ngIf="isEditing && std.id === stdIdToEdit">
                         <button class="save-button" (click)="OnEditSaved()">
-                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            <i class="fa-solid fa-circle-check" style="color: #28B463;" aria-hidden="true"></i>
                         </button>
                     </td>
                     <td *ngIf="isEditing && std.id === stdIdToEdit">

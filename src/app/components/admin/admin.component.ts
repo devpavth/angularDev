@@ -13,6 +13,8 @@ export class AdminComponent {
   isInserting: boolean = false;
   isEditing: boolean = false;
   stdIdToEdit: number | undefined;
+  filterText: string = 'All';
+  allStudents: Student[] = [];
 
   // fb = inject(FormBuilder);
 
@@ -35,6 +37,32 @@ export class AdminComponent {
       fee: [0, [Validators.required, Validators.min(0)]]
     })
   }
+  ngOnInit(){
+    this.allStudents = [...this.students];
+  }
+
+  filterStudentByGender(filterBy: string){
+    if(filterBy.toLowerCase() === 'all' || filterBy === '' || this.allStudents.length === 0){
+      console.log("caling if block");
+      return this.allStudents;
+    }else{
+      return this.allStudents.filter(
+        (std) => {
+          console.log("cAlling else block");
+          return std.gender.toLowerCase() === filterBy.toLowerCase();
+        }
+      )
+    }
+  }
+
+  OnFilterValueChanged(event: any){
+    console.log("event:", event);
+    let selectedValue = event.target.value;
+    console.log("selectedValue:", selectedValue);
+    this.filterText = selectedValue;
+    this.students = this.filterStudentByGender(selectedValue);
+    console.log("this.students:", this.students);
+  }
 
   OnInsertClicked(){
     this.isInserting = true;
@@ -49,6 +77,7 @@ export class AdminComponent {
     console.log("newStudent:", newStudent);
     this.students.push(newStudent);
     this.isInserting = false;
+    this.students = this.filterStudentByGender(this.filterText);
   }
 
   OnInsertCancelled(){
@@ -84,6 +113,7 @@ export class AdminComponent {
       this.students[index] = updatedStudent;
     }
     this.isEditing = false;
+    this.students = this.filterStudentByGender(this.filterText);
   }
 
   OnEditCancelled(){
