@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DemoCapitalizeFisrtComponent } from './components/demo-capitalize-fisrt/demo-capitalize-fisrt.component';
 import { CapitalizeFirstDirective } from './Directives/capitalize-first.directive';
 import { NumberCommaDotOnlyDirective } from './Directives/numberCommaDotOnly/number-comma-dot-only.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NumberCommaDotOnlyDirective } from './Directives/numberCommaDotOnly/num
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
